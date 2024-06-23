@@ -1,5 +1,7 @@
 package uitdrukkingen;
 
+import java.util.function.Consumer;
+
 /**
  * @immutable
  */
@@ -32,5 +34,26 @@ public class LetterlijkeUitdrukking extends Uitdrukking {
 	@Override
 	public boolean equals(Object obj) {
 		return obj instanceof LetterlijkeUitdrukking l && l.waarde == waarde;
+	}
+	
+	@Override
+	public DeeluitdrukkingIterator<Uitdrukking> iteratorDeeluitdrukkingen() {
+		return new DeeluitdrukkingIterator<Uitdrukking>() {
+			
+			@Override
+			public boolean hasNext() {
+				return false;
+			}
+			
+			@Override
+			public Uitdrukking next() {
+				return null;
+			}
+		};
+	}
+	
+	@Override
+	public void forEachVariabekeUitdrukking(Consumer<? super Uitdrukking> consumer) {
+				
 	}
 }

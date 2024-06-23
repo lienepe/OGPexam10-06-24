@@ -1,6 +1,7 @@
 package uitdrukkingen;
 
 import java.util.Iterator;
+import java.util.function.Consumer;
 
 /**
  * @immutable
@@ -17,11 +18,8 @@ public abstract class Uitdrukking {
 	@Override
 	public abstract boolean equals(Object obj);
 	
-	/*
-	public Iterator<Uitdrukking> iteratorDeeluitdrukkingen() {
-		return new Iterator<Uitdrukking>() {
-			
-		};
-	}
-	*/
+	
+	public abstract DeeluitdrukkingIterator<? extends Uitdrukking> iteratorDeeluitdrukkingen();
+	
+	public abstract void forEachVariabekeUitdrukking(Consumer<? super Uitdrukking> consumer);
 }

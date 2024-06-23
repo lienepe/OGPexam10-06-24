@@ -1,5 +1,7 @@
 package uitdrukkingen;
 
+import java.util.function.Consumer;
+
 /**
  * @immutable
  * @invar | getNaam() != null
@@ -42,5 +44,24 @@ public class VariabeleUitdrukking extends Uitdrukking {
 	@Override
 	public boolean equals(Object obj) {
 		return obj instanceof VariabeleUitdrukking v && v.naam == naam;
+	}
+	
+	@Override
+	public DeeluitdrukkingIterator<Uitdrukking> iteratorDeeluitdrukkingen() {
+		return new DeeluitdrukkingIterator<Uitdrukking>() {
+			@Override
+			public boolean hasNext() {
+				return false;
+			}
+			@Override
+			public Uitdrukking next() {
+				return null;
+			}
+		};
+	}
+	
+	@Override
+	public void forEachVariabekeUitdrukking(Consumer<? super Uitdrukking> consumer) {
+		consumer.accept(this);
 	}
 }

@@ -1,5 +1,7 @@
 package uitdrukkingen;
 
+import java.util.function.Consumer;
+
 /**
  * @immutable
  * @invar | getLinker() != null
@@ -48,5 +50,26 @@ public class Optelling extends Uitdrukking{
 	@Override
 	public boolean equals(Object obj) {
 		return obj instanceof Optelling o && o.linker.equals(linker) && o.rechter.equals(rechter);
+	}
+	
+	@Override
+	public DeeluitdrukkingIterator<Uitdrukking> iteratorDeeluitdrukkingen() {
+		return new DeeluitdrukkingIterator<Uitdrukking>() {
+			Uitdrukking[] deeluitdrukkingen = {linker, rechter};
+			int index = 0;
+			@Override
+			public boolean hasNext() {
+				return (index < 2);
+			}
+			@Override
+			public Uitdrukking next() {
+				return deeluitdrukkingen[index++];
+			}
+		};
+	}
+	@Override
+	public void forEachVariabekeUitdrukking(Consumer<? super Uitdrukking> consumer) {
+		linker.forEachVariabekeUitdrukking(consumer);
+		rechter.forEachVariabekeUitdrukking(consumer);
 	}
 }
